@@ -101,13 +101,13 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
         img.src = event.target?.result as string;
         
         img.onload = () => {
-          const canvas = document.createElement('canvas');
-          
+          const canvas = document.createElement("canvas");
+
           let width = img.width;
           let height = img.height;
-          
+
           const maxDimension = 1200;
-          
+
           if (width > height && width > maxDimension) {
             height = Math.round((height * maxDimension) / width);
             width = maxDimension;
@@ -115,29 +115,31 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
             width = Math.round((width * maxDimension) / height);
             height = maxDimension;
           }
-          
+
           canvas.width = width;
           canvas.height = height;
-          
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return reject(new Error('Could not get canvas context'));
-          
+
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return reject(new Error("Could not get canvas context"));
+
           ctx.drawImage(img, 0, 0, width, height);
-          
+
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           let quality = 0.7;
-          
+
           canvas.toBlob(
             (blob) => {
-              if (!blob) return reject(new Error('Could not create image blob'));
-              
+              if (!blob)
+                return reject(new Error("Could not create image blob"));
+
               const compressedFile = new File([blob], file.name, {
-                type: 'image/jpeg',
+                type: "image/jpeg",
                 lastModified: Date.now(),
               });
-              
+
               resolve(compressedFile);
             },
-            'image/jpeg',
+            "image/jpeg",
             quality
           );
         };
@@ -260,9 +262,9 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
     }
   };
 
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) onClose();
-  };
+  // const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   if (e.target === e.currentTarget) onClose();
+  // };
 
   return (
     <AnimatePresence>

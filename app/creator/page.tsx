@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Github, Linkedin, Instagram, Twitter } from 'lucide-react';
 
 export default function CreatorPage() {

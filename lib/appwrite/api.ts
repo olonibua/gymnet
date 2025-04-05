@@ -1,4 +1,4 @@
-import { ID, Query, Models, Account, OAuthProvider } from 'appwrite';
+import { ID, Query, OAuthProvider } from 'appwrite';
 import { account, appwriteConfig, avatars, databases, storage } from './client';
 import { User, UserUpdate } from '@/types';
 
@@ -71,7 +71,7 @@ export async function saveUserToDB(user: User) {
 }
 
 // OAuth Authentication function - Google only
-export async function signInWithProvider(provider: string) {
+export async function signInWithProvider() {
   try {
     // Redirect is handled automatically by Appwrite
     account.createOAuth2Session(
@@ -234,9 +234,9 @@ export async function getUserById(userId: string) {
       appwriteConfig.userCollectionId,
       userId
     );
-    
+
     // Parse string fields that might be JSON encoded
-    if (user.imageUrl && typeof user.imageUrl === 'string') {
+    if (user.imageUrl && typeof user.imageUrl === "string") {
       try {
         if (user.imageUrl.startsWith('"') && user.imageUrl.endsWith('"')) {
           user.imageUrl = JSON.parse(user.imageUrl);
@@ -245,11 +245,14 @@ export async function getUserById(userId: string) {
         console.error("Error parsing imageUrl:", e);
       }
     }
-    
+
     return user;
-  } catch (error) {
-    console.error('Error fetching user:', error);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to create account";
+    console.error("Error fetching user:", errorMessage);
     return null;
+    
   }
 }
 
@@ -299,21 +302,22 @@ export async function uploadFile(file: File) {
 // Search users by name, business description, or skills
 export const searchUsers = async (searchTerm: string): Promise<User[]> => {
   try {
-    
     const response = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [
         Query.or([
-          Query.contains('name', searchTerm),
-          Query.contains('businessDescription', searchTerm)
-        ])
+          Query.contains("name", searchTerm),
+          Query.contains("businessDescription", searchTerm),
+        ]),
       ]
     );
-    
+
     return response.documents as unknown as User[];
-  } catch (error) {
-    console.error('Search users error:', error);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to create account";
+    console.error("Search users error:", errorMessage);
     return [];
   }
 }; 

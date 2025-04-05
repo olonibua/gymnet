@@ -99,7 +99,7 @@ export default function ProfilePage() {
                         ) {
                           try {
                             cleanUrl = JSON.parse(cleanUrl);
-                          } catch (e) {
+                          } catch  {
                             // If that fails, try removing manual escapes and quotes
                             cleanUrl = cleanUrl
                               .replace(/\\/g, "")

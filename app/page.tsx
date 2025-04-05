@@ -191,7 +191,7 @@ export default function Home() {
                       animate={{ opacity: 1 }}
                     >
                       <p className="mb-2">
-                        No results found for "{searchTerm}"
+                        No results found for &ldquo;{searchTerm}&ldquo;
                       </p>
                       <p className="text-sm text-gray-500">
                         Try a different search term or check your spelling
