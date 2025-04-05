@@ -26,7 +26,7 @@ export default function CreatorContent() {
               <div className="w-40 h-40 relative rounded-full overflow-hidden border-4 border-violet-500/30">
                 <Image
                   src="/creator.jpg"
-                  alt="Creator&apos;s profile"
+                  alt="Creator's profile"
                   fill
                   className="object-cover"
                   priority
@@ -95,21 +95,9 @@ export default function CreatorContent() {
 
                 <p className="text-zinc-300 mb-6">
                   Hey there! I&apos;m Tolu, a passionate developer who created
-                  this platform to help gym members connect professionally. When
-                  I&apos;m not coding, you can find me in the gym or exploring
-                  new technologies.
+                  this platform to help gym members connect professionally.
+                  Available for all types of web and mobile app developement.
                 </p>
-
-                <div className="flex flex-col gap-2 mb-4 text-sm text-zinc-400">
-                  <p className="flex items-center gap-2">
-                    <Mail size={16} className="text-violet-400" />
-                    <span>olonts@gmail.com</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Phone size={16} className="text-violet-400" />
-                    <span>WhatsApp: +234 814 924 9926</span>
-                  </p>
-                </div>
               </div>
             </div>
 
@@ -119,17 +107,35 @@ export default function CreatorContent() {
                   About Me
                 </h3>
                 <p className="text-zinc-300 mt-2">
-                  I&apos;m a full-stack developer with expertise in React,
-                  Next.js, and modern web technologies. I enjoy building
-                  beautiful, functional applications that solve real problems.
-                  This platform is my attempt to combine my passion for fitness
-                  and technology.
+                  I&apos;m a full-stack developer with expertise in
+                  Typescript,React, Next.js, Node, wordpress, and modern web
+                  technologies. I enjoy building beautiful, functional
+                  applications that solve real problems. This platform is my
+                  attempt to combine my passion for fitness and technology.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-xl font-semibold text-violet-400">
                   Experience
+                </h3>
+               
+              </div>
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-violet-400">
+                  Senior Developer
+                </h3>
+                <p className="text-zinc-400 mb-2">Crypto U | 2024 - Present</p>
+                <p className="text-zinc-300">
+                  Led the development of multiple web applications using React,
+                  Next.js and Node.js. Implemented CI/CD pipelines and optimized
+                  application performance.
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-violet-400">
+                  Full Stack Developer
                 </h3>
                 <p className="text-zinc-400 mb-2">LiLab | 2022 - 2024</p>
                 <p className="text-zinc-300">
