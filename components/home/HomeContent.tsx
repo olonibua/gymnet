@@ -257,7 +257,7 @@ export default function HomeContent() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {!user ? (
               <>
-                <Link href="/explore" className="w-full sm:w-auto">
+                <Link href="/" className="w-full sm:w-auto">
                   <Button
                     className="w-full sm:w-auto px-4 sm:px-8 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white border-0"
                     size="lg"

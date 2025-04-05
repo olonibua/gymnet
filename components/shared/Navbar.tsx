@@ -124,7 +124,7 @@ export default function Navbar() {
                 </Link>
               )}
               <Link 
-                href="/explore" 
+                href="/" 
                 className="text-gray-200 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

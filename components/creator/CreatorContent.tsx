@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Github, Linkedin, Instagram, Twitter } from 'lucide-react';
+import { Github, Linkedin, Instagram, Twitter, Mail, Phone } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the custom navbar
@@ -52,7 +52,7 @@ export default function CreatorContent() {
                     <Github size={20} />
                   </a>
                   <a
-                    href="https://linkedin.com/in/olonibua"
+                    href="https://linkedin.com/in/olonibua-tolulope"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-400 hover:text-violet-400 transition-colors"
@@ -60,7 +60,7 @@ export default function CreatorContent() {
                     <Linkedin size={20} />
                   </a>
                   <a
-                    href="https://instagram.com/olonibua"
+                    href="https://instagram.com/its_olonts"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-400 hover:text-violet-400 transition-colors"
@@ -68,12 +68,28 @@ export default function CreatorContent() {
                     <Instagram size={20} />
                   </a>
                   <a
-                    href="https://twitter.com/olonibua"
+                    href="https://x.com/itsolonts"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-zinc-400 hover:text-violet-400 transition-colors"
                   >
                     <Twitter size={20} />
+                  </a>
+                  <a
+                    href="mailto:olonts@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-400 hover:text-violet-400 transition-colors"
+                  >
+                    <Mail size={20} />
+                  </a>
+                  <a
+                    href="https://wa.me/2348149249926"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-400 hover:text-violet-400 transition-colors"
+                  >
+                    <Phone size={20} />
                   </a>
                 </div>
 
@@ -83,6 +99,17 @@ export default function CreatorContent() {
                   I&apos;m not coding, you can find me in the gym or exploring
                   new technologies.
                 </p>
+
+                <div className="flex flex-col gap-2 mb-4 text-sm text-zinc-400">
+                  <p className="flex items-center gap-2">
+                    <Mail size={16} className="text-violet-400" />
+                    <span>olonts@gmail.com</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Phone size={16} className="text-violet-400" />
+                    <span>WhatsApp: +234 814 924 9926</span>
+                  </p>
+                </div>
               </div>
             </div>
 
