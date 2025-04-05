@@ -3,8 +3,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getCurrentUser, signInWithProvider, signOut as appwriteSignOut } from '@/lib/appwrite/api';
 import { AuthContextType, User } from '@/types';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { account } from '@/lib/appwrite/client';
 
 const INITIAL_USER = null;
 
@@ -20,80 +18,64 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(INITIAL_USER);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Check URL for auth success/error params
+  // Check auth status on mount
   useEffect(() => {
-    const authSuccess = searchParams.get('auth_success');
-    const authError = searchParams.get('auth_error');
+    setIsMounted(true);
+    checkAuthStatus();
+  }, []);
+
+  // Check URL params only on client-side after mounting
+  useEffect(() => {
+    if (!isMounted) return;
     
-    if (authSuccess) {
-      checkAuthStatus();
+    try {
+      const url = new URL(window.location.href);
+      const authSuccess = url.searchParams.get('auth_success');
+      const authError = url.searchParams.get('auth_error');
+      
+      if (authSuccess) {
+        checkAuthStatus();
+      }
+      
+      if (authError) {
+        console.error('Authentication error:', authError);
+      }
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Error parsing URL';
+      console.error("Auth URL parameter check failed:", errorMessage);
     }
-    
-    if (authError) {
-      console.error('Authentication error:', authError);
-        }
-    }, [searchParams]);
+  }, [isMounted]);
 
   const checkAuthStatus = async () => {
     try {
       setIsLoading(true);
+      const documentUser = await getCurrentUser();
       
-      // Check if user is authenticated first
-      let session;
-      try {
-        session = await account.getSession('current');
-      } catch (e) {
-        // This error is expected for unauthenticated users - don't log it
-        setUser(null);
-        setIsLoading(false);
-        return false;
-      }
+      // Transform Document to User or set null
+      const userObj = documentUser ? {
+        $id: documentUser.$id,
+        accountId: documentUser.accountId || '',
+        email: documentUser.email || '',
+        name: documentUser.name || '',
+        username: documentUser.username || '',
+        imageUrl: documentUser.imageUrl || '',
+        bio: documentUser.bio || '',
+        location: documentUser.location || '',
+        businessDescription: documentUser.businessDescription || '',
+        // Add missing properties with defaults
+        contactDetails: documentUser.contactDetails || {},
+        workImages: documentUser.workImages || [],
+        socialLinks: documentUser.socialLinks || {},
+        gymLocations: documentUser.gymLocations || []
+      } as User : null;
       
-      // If we have a session, get the account
-      if (!session) {
-        setUser(null);
-        setIsLoading(false);
-        return false;
-      }
-      
-      const currentAccount = await account.get();
-      
-      if (!currentAccount) {
-        setUser(null);
-        setIsLoading(false);
-        return false;
-      }
-      
-      // Try to get user from database
-      try {
-        const currentUser = await getCurrentUser();
-        
-        if (currentUser) {
-          setUser(currentUser as unknown as User);
-          
-          // Redirect to profile if 'auth_success' is in URL
-          if (searchParams.get('auth_success')) {
-            router.push(`/profile/${currentUser.$id}`);
-          }
-          
-          return true;
-        } else {
-          // User is authenticated but profile doesn't exist
-          setUser(null);
-          return false;
-        }
-      } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : 'Failed to fetch user profile';
-        console.error('User profile error:', errorMessage);
-        setUser(null);
-        return false;
-      }
+      setUser(userObj);
+      return !!userObj;
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Authentication check failed';
-      console.error('Auth status check error:', errorMessage);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to check auth status';
+      console.error("Auth status check failed:", errorMessage);
       setUser(null);
       return false;
     } finally {
@@ -103,43 +85,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const handleSignInWithProvider = async () => {
     try {
-      setIsLoading(true);
       await signInWithProvider();
-      // No need to navigate or set user here as we'll handle that in the callback
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Sign in failed';
-      console.error('Sign in error:', errorMessage);
-      throw error;
-    } finally {
-      setIsLoading(false);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to sign in';
+      console.error("Sign in failed:", errorMessage);
     }
   };
 
-  const signOut = async () => {
+  const handleSignOut = async () => {
     try {
-      setIsLoading(true);
       await appwriteSignOut();
       setUser(null);
-      router.push('/');
+      window.location.href = '/';
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Sign out failed';
-      console.error('Sign out error:', errorMessage);
-    } finally {
-      setIsLoading(false);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to sign out';
+      console.error("Sign out failed:", errorMessage);
     }
   };
-
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
 
   const value = {
     user,
-    setUser,
     isLoading,
+    setUser,
     checkAuthStatus,
     signInWithProvider: handleSignInWithProvider,
-    signOut,
+    signOut: handleSignOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
