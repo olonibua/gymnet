@@ -87,15 +87,16 @@ export default function CreatorPage() {
         >
           <h2 className="text-2xl font-bold text-white mb-4">About Me</h2>
           <p className="text-zinc-300 leading-relaxed mb-4">
-            I'm a full stack developer with expertise in React, Node.js, and
-            modern web technologies, as well as a prompt engineer. My passion lies in creating intuitive and
-            performant applications that solve real-world problems.
+            I&lsquo;m a full stack developer with expertise in React, Node.js,
+            and modern web technologies, as well as a prompt engineer. My
+            passion lies in creating intuitive and performant applications that
+            solve real-world problems.
           </p>
           <p className="text-zinc-300 leading-relaxed">
-            With several years of experience in software development, I've
+            With several years of experience in software development, I&lsquo;ve
             worked on projects ranging from e-commerce platforms to social
-            networking applications. I'm constantly learning and adapting to new
-            technologies to create better user experiences.
+            networking applications. I&lsquo;m constantly learning and adapting
+            to new technologies to create better user experiences.
           </p>
         </motion.div>
 

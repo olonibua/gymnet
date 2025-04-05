@@ -125,7 +125,7 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
           ctx.drawImage(img, 0, 0, width, height);
 
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          let quality = 0.7;
+          const quality = 0.7;
 
           canvas.toBlob(
             (blob) => {
