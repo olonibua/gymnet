@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { User } from '@/types';
 import { updateUser, uploadFile } from '@/lib/appwrite/api';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -97,7 +98,7 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        const img = new Image();
+        const img = new window.Image();
         img.src = event.target?.result as string;
         
         img.onload = () => {
@@ -124,7 +125,6 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
 
           ctx.drawImage(img, 0, 0, width, height);
 
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const quality = 0.7;
 
           canvas.toBlob(
@@ -488,14 +488,12 @@ export function EditProfileModal({ isOpen, onClose, user, onUpdate }: EditProfil
                           {existingWorkImages.map((img, index) => (
                             <div key={index} className="relative">
                               <div className="h-24 w-full overflow-hidden rounded-md">
-                                <img 
-                                  src={typeof img === 'string' ? img : ''}
+                                <Image 
+                                  src={typeof img === 'string' ? img : '/placeholder-image.jpg'}
                                   alt={`Work image ${index + 1}`}
-                                  className="h-full w-full object-cover"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = '/placeholder-image.jpg';
-                                  }}
+                                  fill
+                                  className="object-cover"
+                                  onError={() => {/* Error handled by src fallback */}}
                                 />
                               </div>
                               <button
