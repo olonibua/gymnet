@@ -73,9 +73,10 @@ export default function CreatorContent() {
                 </div>
 
                 <p className="text-zinc-300 mb-6">
-                  Hey there! I'm Tolu, a passionate developer who created this platform 
-                  to help gym members connect professionally. When I'm not coding, 
-                  you can find me in the gym or exploring new technologies.
+                  Hey there! I&lsquo;m Tolu, a passionate developer who created
+                  this platform to help gym members connect professionally. When
+                  I&lsquo;m not coding, you can find me in the gym or exploring
+                  new technologies.
                 </p>
               </div>
             </div>
@@ -86,10 +87,11 @@ export default function CreatorContent() {
                   About Me
                 </h3>
                 <p className="text-zinc-300 mt-2">
-                  I'm a full-stack developer with expertise in React, Next.js, and 
-                  modern web technologies. I enjoy building beautiful, functional 
-                  applications that solve real problems. This platform is my attempt 
-                  to combine my passion for fitness and technology.
+                  I&lsquo;m a full-stack developer with expertise in React,
+                  Next.js, and modern web technologies. I enjoy building
+                  beautiful, functional applications that solve real problems.
+                  This platform is my attempt to combine my passion for fitness
+                  and technology.
                 </p>
               </div>
 
@@ -99,14 +101,16 @@ export default function CreatorContent() {
                 </h3>
                 <p className="text-zinc-400 mb-2">LiLab | 2022 - 2024</p>
                 <p className="text-zinc-300">
-                  Developed and maintained various web applications. Collaborated
-                  with design teams to implement responsive and accessible user
-                  interfaces.
+                  Developed and maintained various web applications.
+                  Collaborated with design teams to implement responsive and
+                  accessible user interfaces.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-violet-400">Skills</h3>
+                <h3 className="text-xl font-semibold text-violet-400">
+                  Skills
+                </h3>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {[
                     "JavaScript",
