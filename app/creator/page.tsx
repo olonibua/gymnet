@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Github, Linkedin, Instagram, Twitter } from 'lucide-react';
+import { Suspense } from 'react';
 
-export default function CreatorPage() {
+function CreatorContent() {
   return (
     <div className="min-h-screen bg-black pt-24 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
@@ -163,5 +164,17 @@ export default function CreatorPage() {
         </motion.div>
       </div>
     </div>
+  );
+}
+
+export default function CreatorPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-500"></div>
+      </div>
+    }>
+      <CreatorContent />
+    </Suspense>
   );
 } 
