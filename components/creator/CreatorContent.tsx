@@ -3,12 +3,17 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Github, Linkedin, Instagram, Twitter } from 'lucide-react';
-import Navbar from '@/components/shared/Navbar';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the custom navbar
+const CreatorNavbar = dynamic(() => import('@/components/creator/CreatorNavbar'), {
+  ssr: false
+});
 
 export default function CreatorContent() {
   return (
     <div className="min-h-screen bg-black overflow-hidden">
-      <Navbar />
+      <CreatorNavbar />
       <div className="min-h-screen bg-black pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -21,7 +26,7 @@ export default function CreatorContent() {
               <div className="w-40 h-40 relative rounded-full overflow-hidden border-4 border-violet-500/30">
                 <Image
                   src="/creator.jpg"
-                  alt="Creator's profile"
+                  alt="Creator&apos;s profile"
                   fill
                   className="object-cover"
                   priority
@@ -73,9 +78,9 @@ export default function CreatorContent() {
                 </div>
 
                 <p className="text-zinc-300 mb-6">
-                  Hey there! I&lsquo;m Tolu, a passionate developer who created
+                  Hey there! I&apos;m Tolu, a passionate developer who created
                   this platform to help gym members connect professionally. When
-                  I&lsquo;m not coding, you can find me in the gym or exploring
+                  I&apos;m not coding, you can find me in the gym or exploring
                   new technologies.
                 </p>
               </div>
@@ -87,7 +92,7 @@ export default function CreatorContent() {
                   About Me
                 </h3>
                 <p className="text-zinc-300 mt-2">
-                  I&lsquo;m a full-stack developer with expertise in React,
+                  I&apos;m a full-stack developer with expertise in React,
                   Next.js, and modern web technologies. I enjoy building
                   beautiful, functional applications that solve real problems.
                   This platform is my attempt to combine my passion for fitness
