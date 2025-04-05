@@ -101,10 +101,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const handleSignInWithProvider = async (provider: string) => {
+  const handleSignInWithProvider = async () => {
     try {
       setIsLoading(true);
-      await signInWithProvider(provider);
+      await signInWithProvider();
       // No need to navigate or set user here as we'll handle that in the callback
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Sign in failed';
