@@ -10,8 +10,13 @@ import { useAuth } from "@/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
-import Navbar from "@/components/shared/Navbar";
+import dynamic from "next/dynamic";
 import { useDebounce } from "@/hooks/useDebounce";
+
+// Dynamically import the custom navbar
+const HomeNavbar = dynamic(() => import("@/components/home/HomeNavbar"), {
+  ssr: false
+});
 
 export default function HomeContent() {
   const [randomUsers, setRandomUsers] = useState<User[]>([]);
@@ -106,10 +111,9 @@ export default function HomeContent() {
   };
 
   return (
-    <div className="min-h-screen bg-black overflow-hidden">
-      <Navbar />
-
-      <main className="flex flex-col items-center pt-24 md:pt-32 px-4 sm:px-8">
+    <>
+      <HomeNavbar />
+      <main className="min-h-screen bg-black pt-20 pb-16">
         <div className="max-w-4xl w-full mx-auto my-8 md:my-16 text-center">
           <motion.h1
             className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 px-2"
@@ -304,7 +308,7 @@ export default function HomeContent() {
           />
         </motion.div>
       </main>
-    </div>
+    </>
   );
 }
 
