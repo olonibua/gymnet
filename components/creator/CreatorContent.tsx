@@ -51,22 +51,7 @@ export default function CreatorContent() {
                   >
                     <Github size={20} />
                   </a>
-                  <a
-                    href="https://linkedin.com/in/olonibua-tolulope"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-violet-400 transition-colors"
-                  >
-                    <Linkedin size={20} />
-                  </a>
-                  <a
-                    href="https://instagram.com/its_olonts"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-violet-400 transition-colors"
-                  >
-                    <Instagram size={20} />
-                  </a>
+                 
                   <a
                     href="https://x.com/itsolonts"
                     target="_blank"
