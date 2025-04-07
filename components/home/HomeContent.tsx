@@ -209,7 +209,7 @@ export default function HomeContent() {
 
           {/* User cards carousel - only show if not searching */}
           {!searchTerm && (
-            <div className="w-full overflow-hidden my-8 sm:my-12 relative h-[260px] sm:h-[220px] carousel-mask">
+            <div className="w-full overflow-hidden my-8 sm:my-12 relative h-[300px] sm:h-[220px] carousel-mask">
               {isLoading ? (
                 <div className="flex justify-center items-center h-full">
                   <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-500"></div>
@@ -220,34 +220,36 @@ export default function HomeContent() {
                   key={randomUsers.map((user) => user.$id).join("-")}
                 >
                   {randomUsers.map((randomUser, index) => (
-                    <motion.div
+                    <Link 
+                      href={`/profile/${randomUser.$id}`}
                       key={`${randomUser.$id}-${index}`}
-                      className="w-1/8 bg-zinc-900/70 backdrop-blur-lg border border-zinc-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.5,
-                        delay: index * 0.1,
-                        ease: [0.25, 1, 0.5, 1],
-                      }}
+                      className="w-1/8 block"
                     >
-                      <p className="text-lg sm:text-xl mb-2">
-                        <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
-                          {randomUser.name}
-                        </span>{" "}
-                        is a {randomUser.businessDescription || "professional"}{" "}
-                        in your gym community
-                      </p>
-
-                      <Link
-                        href={`/profile/${randomUser.$id}`}
-                        className="mt-auto"
+                      <motion.div
+                        className=" bg-zinc-900/70 backdrop-blur-lg border border-zinc-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between cursor-pointer hover:border-violet-500/50 transition-colors"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: index * 0.1,
+                          ease: [0.25, 1, 0.5, 1],
+                        }}
                       >
-                        <Button className="mt-4 w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white border-0">
+                        <div className="flex-1">
+                          <p className="text-base sm:text-lg mb-2">
+                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500">
+                              {randomUser.name}
+                            </span>{" "}
+                            is a {randomUser.businessDescription || "professional"}{" "}
+                            in your gym community
+                          </p>
+                        </div>
+
+                        <div className="mt-auto text-lg sm:text-base w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white font-medium py-2 px-4 rounded-md text-center transition-all duration-300">
                           View Profile
-                        </Button>
-                      </Link>
-                    </motion.div>
+                        </div>
+                      </motion.div>
+                    </Link>
                   ))}
                 </motion.div>
               )}
