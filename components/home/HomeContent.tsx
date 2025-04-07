@@ -245,7 +245,7 @@ export default function HomeContent() {
                           </p>
                         </div>
 
-                        <div className="mt-auto text-lg sm:text-base w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white font-medium py-2 px-4 rounded-md text-center transition-all duration-300">
+                        <div className="mt-auto text-xs sm:text-base w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white font-medium py-3 px-4 rounded-sm text-center transition-all duration-300">
                           View Profile
                         </div>
                       </motion.div>
