@@ -326,51 +326,51 @@ function ProfileCard({ profile }: { profile: User }) {
         ? JSON.parse(profile.imageUrl)
         : profile.imageUrl;
     }
-  } catch  {
+  } catch {
     profileImageUrl = "";
   }
 
   return (
-    <motion.div
-      className="relative rounded-xl overflow-hidden h-[220px] group"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" />
+    <Link href={`/profile/${profile.$id}`} className="block">
+      <motion.div
+        className="relative rounded-xl overflow-hidden h-[220px] group cursor-pointer"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -5 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Background Image */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" />
 
-      {profileImageUrl ? (
-        <div className="absolute inset-0">
-          <Image
-            src={profileImageUrl}
-            alt={profile.name}
-            fill
-            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = "/placeholder-profile.jpg"; // Fallback image
-            }}
-          />
-        </div>
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-800/50 to-fuchsia-800/50" />
-      )}
+        {profileImageUrl ? (
+          <div className="absolute inset-0">
+            <Image
+              src={profileImageUrl}
+              alt={profile.name}
+              fill
+              className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = "/placeholder-profile.jpg"; // Fallback image
+              }}
+            />
+          </div>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-800/50 to-fuchsia-800/50" />
+        )}
 
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-        <h3 className="text-xl font-bold text-white mb-1">{profile.name}</h3>
-        <p className="text-sm text-gray-200 line-clamp-2 mb-3">
-          {profile.businessDescription || "Professional at your gym"}
-        </p>
-        <Link href={`/profile/${profile.$id}`}>
-          <Button className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white border-0 transition-all duration-300">
+        {/* Content */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+          <h3 className="text-xl font-bold text-white mb-1">{profile.name}</h3>
+          <p className="text-sm text-gray-200 line-clamp-2 mb-3">
+            {profile.businessDescription || "Professional at your gym"}
+          </p>
+          <div className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white font-medium py-2 px-4 rounded-md text-center transition-all duration-300">
             View Profile
-          </Button>
-        </Link>
-      </div>
-    </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
