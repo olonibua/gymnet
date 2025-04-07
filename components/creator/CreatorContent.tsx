@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Github, Linkedin, Instagram, Twitter, Mail, Phone } from 'lucide-react';
+import { Github, Twitter, Mail, Phone } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the custom navbar
